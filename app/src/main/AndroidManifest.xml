@@ -17,6 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:authorities="com.yourcampusmap.rememberme.noteprovide"
+            android:name=".NoteProvide"
+            android:exported="false"
+        />
     </application>
 
 </manifest>
