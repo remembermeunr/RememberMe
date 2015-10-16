@@ -18,10 +18,10 @@
             </intent-filter>
         </activity>
         <provider
-            android:authorities="com.yourcampusmap.rememberme.noteprovide"
-            android:name=".NoteProvide"
-            android:exported="false"
-        />
+            android:authorities="com.yourcampusmap.rememberme.notesprovider"
+            android:name=".NotesProvider"
+            android:exported="false" />
+
     </application>
 
 </manifest>
