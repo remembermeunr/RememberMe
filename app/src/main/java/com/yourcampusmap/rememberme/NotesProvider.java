@@ -6,7 +6,6 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.support.annotation.Nullable;
 
 /**
  * Created by Majadly on 10/15/2015.
@@ -25,6 +24,8 @@ public class NotesProvider extends ContentProvider {
     private static final UriMatcher uriMatcher =
             new UriMatcher(UriMatcher.NO_MATCH);
 
+    public static final String CONTENT_ITEM_TYPE = "note";
+
     static {
         uriMatcher.addURI(AUTHORITY, BASE_PATH, NOTES);
         uriMatcher.addURI(AUTHORITY, BASE_PATH +  "/#", NOTES_ID); // /# its a wild card, means any numerical value
@@ -42,11 +43,17 @@ public class NotesProvider extends ContentProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+
+        if (uriMatcher.match(uri) ==  NOTES_ID){
+            selection = DBOpenHelper.NOTE_ID + "=" + uri.getLastPathSegment();
+        }
+
+
         return database.query(DBOpenHelper.TABLE_NOTES, DBOpenHelper.ALL_COLUMNS,
                 selection, null, null, null,
                 DBOpenHelper.NOTE_CREATED + " DESC");
         // desc mean the data to be returned in descending
-        // order with the latest nore listed first
+        // order with the latest note listed first
     }
 
     @Override
